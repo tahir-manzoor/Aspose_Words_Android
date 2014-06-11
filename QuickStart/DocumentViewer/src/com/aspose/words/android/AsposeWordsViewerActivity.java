@@ -133,7 +133,8 @@ public class AsposeWordsViewerActivity extends Activity implements
 
 		try {
 			License lic = new License();
-			lic.setLicense(gLicenseFile.getAbsolutePath());
+			InputStream stream = new FileInputStream(gLicenseFile.getAbsolutePath());
+			lic.setLicense(stream);
 			mLicensed = true;
 			log("License set successfully.");
 		} catch (Exception e) {
