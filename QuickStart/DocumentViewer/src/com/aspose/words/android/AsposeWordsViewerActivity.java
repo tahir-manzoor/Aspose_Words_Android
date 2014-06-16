@@ -9,6 +9,8 @@
 package com.aspose.words.android;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -109,13 +111,18 @@ public class AsposeWordsViewerActivity extends Activity implements
 		return new File(gPathToSave, newName).getAbsolutePath();
 	}
 
-	private void log(String text) {
-		StringBuilder msg = new StringBuilder(mLogsTextView.getText());		
-		msg.append("\n");
-		msg.append(text);
-		
-		mLogsTextView.setText(msg.toString());
-	}
+	private void log(final String text) {
+	    mHandler.post(new Runnable() {
+	
+	        @Override
+	            public void run() {
+	                StringBuilder msg = new StringBuilder(mLogsTextView.getText());
+	                msg.append("\n");
+	                msg.append(text);
+	                mLogsTextView.setText(msg.toString());
+	            }
+	        });
+	    }
 
 	private void setLicense() {
 		log("Trying to find license at " + gLicenseFile.getAbsolutePath());
